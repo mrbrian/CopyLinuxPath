@@ -1,0 +1,6 @@
+[
+	{
+        "caption" : "Copy linux path",
+		"command" : "copy_linux_path"
+	}
+]
