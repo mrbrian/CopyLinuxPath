@@ -1,0 +1,3 @@
+[
+    { "caption": "Fart: Run tmux command", "command": "run_remote_tmux" }
+]

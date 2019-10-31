@@ -1,6 +1,8 @@
 import os
 import sublime
 import re
+import subprocess
+import sublime_plugin
 
 class CopyLinuxPath(sublime_plugin.TextCommand):
 
@@ -12,7 +14,7 @@ class CopyLinuxPath(sublime_plugin.TextCommand):
         sublime.set_clipboard(no_filename)
 
 class AddIncludeAtTop(sublime_plugin.TextCommand):
-    
+
     def run(self, edit, **kwargs):
         INCLUDE_STR = "#include"
         active_view = sublime.active_window().active_view()
@@ -30,3 +32,13 @@ class AddIncludeAtTop(sublime_plugin.TextCommand):
         active_view.run_command("sort_lines")
         selection.clear()
         active_view.sel().add_all(orig_selection)
+
+class RunRemoteTmuxCommand(sublime_plugin.TextCommand):
+
+    def run(self, edit, **kwargs):
+        cmd_a = ["ssh", "localhost", "tmux send-keys", "echo\ hello Enter"]
+        wd = "C:\\Windows\\System32\\OpenSSH"
+        p = subprocess.Popen(cmd_a, cwd=wd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+        if p.stdout is not None:
+            msg = p.stdout.readlines()
+        print(msg)
